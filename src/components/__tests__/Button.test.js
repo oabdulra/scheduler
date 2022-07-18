@@ -4,7 +4,6 @@ import { render, cleanup, fireEvent } from "@testing-library/react";
 
 import Button from "components/Button";
 
-import classNames from "classnames";
 
 
 afterEach(cleanup);
