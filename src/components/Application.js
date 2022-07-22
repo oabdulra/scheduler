@@ -66,6 +66,17 @@ export default function Application(props) {
   
   const [day, setDay] = useState("Monday");
 
+  const appointmentList = Object.values(appointments).map(appointment => {
+    return (
+      <Appointment 
+         key={appointment.id} 
+         {...appointment} 
+      />
+    )
+  });
+
+
+
   return (
     <main className="layout">
       <section className="sidebar">
@@ -79,7 +90,7 @@ export default function Application(props) {
             <DayList
               days={days}
               day={value}
-              setDay={onChange}
+              onChange={setDay}
             />
           </nav>
           <img
@@ -89,7 +100,7 @@ export default function Application(props) {
           />
       </section>
       <section className="schedule">
-        {/* Replace this with the schedule elements durint the "The Scheduler" activity. */}
+        {appointmentList}
       </section>
     </main>
   );
