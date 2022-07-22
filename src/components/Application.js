@@ -2,6 +2,7 @@ import React, {useState} from "react";
 
 import "./Application.scss";
 import DayList from "./DayList";
+import Appointment from "./Appointment/index"
 
 const days = [
   {
