@@ -1,4 +1,5 @@
-import React, {useState} from "react";
+import React, {useState , useEffect} from "react";
+import axios from "axios";
 
 import "./Application.scss";
 import DayList from "./DayList";
@@ -89,7 +90,7 @@ export default function Application(props) {
           <nav className="sidebar__menu">
             <DayList
               days={days}
-              day={value}
+              value={day}
               onChange={setDay}
             />
           </nav>
