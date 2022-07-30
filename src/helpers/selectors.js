@@ -29,3 +29,19 @@ export function getInterview(state, interview) {
   return selectedInterviewer;
 
 };
+
+export function getInterviewersForDay(state, day) {
+
+  let interviewerList = [];
+
+  for(let appD of state.days) {
+
+    if (appD.name === day) {
+      appD.interviewers.forEach(interviewP => interviewerList.push(state.interviewers[interviewP]));
+    }
+
+  };
+
+  return interviewerList;
+
+};
