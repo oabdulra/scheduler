@@ -3,7 +3,8 @@ import axios from "axios";
 
 import "./Application.scss";
 import DayList from "./DayList";
-import Appointment from "./Appointment/index";
+import Appointment from "./Appointment/";
+import { getAppointmentsForDay } from "helpers/selectors";
 
 
 const appointments = {
@@ -48,14 +49,29 @@ const appointments = {
 
 export default function Application(props) {
   
-  const [day, setDays] = useState([]);
+  const [state, setState] = useState({
+    day: "Monday",
+    days: [],
+    appointments: {}
+  });
+
+  const dailyAppointments = getAppointmentsForDay(state, state.day);
+  
+  // const setDays = (days) => {
+  //   setState(prev => ({ ...prev, days }));
+  // }
+
 
   useEffect(() => {
-    axios.get('http://localhost:8001/api/days')
-      .then(results => setDays(results.data))
+    Promise.all([
+      axios.get('http://localhost:8001/api/days'),
+      axios.get('http://localhost:8001/api/appointments')
+      ]).then((all) => {
+      setState(prev => ({...prev, days:all[0].data, appointments:all[1].data}))
+    })
   }, []);
 
-  const appointmentList = Object.values(appointments).map(appointment => {
+  const appointmentList = dailyAppointments.map(appointment => {
     return (
       <Appointment 
          key={appointment.id} 
@@ -77,9 +93,9 @@ export default function Application(props) {
           <hr className="sidebar__separator sidebar--centered" />
           <nav className="sidebar__menu">
             <DayList
-              days={days}
-              value={day}
-              onChange={setDay}
+              days={state.days}
+              value={state.day}
+              onChange={setDays}
             />
           </nav>
           <img
