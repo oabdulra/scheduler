@@ -70,13 +70,30 @@ export default function Application(props) {
 
     return axios.put(`http://localhost:8001/api/appointments/${id}`, appointment)
       .then(() => {
-        setState(prev => ({...prev}))
+        setState({...state, appointments})
       })
       .catch(error => {
         console.log(error)
       });
     
   };
+
+  function cancelInterview(id) {
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+    const appointment = {
+      ...state.appointments[id],
+      interview: null
+    };
+
+    return axios.delete(`http://localhost:8001/api/appointments/${id}`)
+      .then(() => {
+        setState({...state, appointments})
+      });
+
+  }
 
   
 
