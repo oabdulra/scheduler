@@ -17,6 +17,7 @@ export default function Appointment(props) {
   const SHOW = "SHOW";
   const CREATE = "CREATE";
   const SAVING = "SAVING";
+  const CONFIRM = "CONFIRM";
 
 
   const { mode, transition, back } = useVisualMode(
@@ -54,6 +55,10 @@ export default function Appointment(props) {
       {mode === SAVING && (
         <Status 
         message='Saving' />
+      )}
+      {mode === CONFIRM && (
+        <Status
+         message='Confirm' />
       )}
     </article>
   )
