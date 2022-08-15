@@ -74,7 +74,8 @@ export default function Appointment(props) {
       )}
       {mode === EDIT && (
         <Form
-          name={props.interview.student}
+          student={props.student}
+          interview={props.interview}
           interviewer={props.interview.interviewer}
           interviewers={props.interviewers}
           onCancel={back}
