@@ -24,10 +24,24 @@ export default function useApplicationData() {
 
   
 
-  const updateSpots = function(state, appointment) {
+  const updateSpots = function(state, appointments) {
 
-    
+    let numSpots = 0;
 
+    for (let i of state.appointments) { 
+
+      if(appointments[i].interview === null) {
+        numSpots += 1;
+      }
+      
+    };
+
+    const updatedSpots = state.days.map(slot => {
+      slot.name === state.day ? {...state.days.find(day => day.name === state.day), numSpots} : slot
+    });
+
+
+    return updatedSpots;
 
   };
 
