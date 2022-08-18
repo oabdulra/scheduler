@@ -14,11 +14,11 @@ export default function useApplicationData() {
     Promise.all([
       axios.get('http://localhost:8001/api/days'),
       axios.get('http://localhost:8001/api/appointments'),
-      axios.get('http://localhost:8001/api/interviewers')
+      axios.get('http://localhost:8001/api/interviewers'),
       ]).then((all) => {
         setState(prev => ({...prev, days: all[0].data, appointments: all[1].data,  interviewers: all[2].data}));
-        console.log("useEffect test", all);
-    })
+        
+    });
   }, []);
 
 
@@ -28,19 +28,28 @@ export default function useApplicationData() {
   const updateSpots = function(state, appointments) {
 
     let numSpots = 0;
+    const selectedDay = state.days.filter(days => days.name === state.day)[0];
 
-    for (let i of state.appointments) { 
-      console.log("for loop", i)
-      if(appointments[i].interview === null) {
-        numSpots += 1;
+    for (let appt of selectedDay.appointments) {
+      if(!appointments[appt].interview){
+        numSpots++;
       }
-      
-    };
+    }
 
     const updatedSpots = state.days.map(slot => {
-      slot.name === state.day ? {...state.days.find(day => day.name === state.day), numSpots} : slot
-    });
 
+        if (slot !== selectedDay) {
+          return slot;
+        }
+
+        return {
+          ...slot,
+          numSpots
+        };
+
+        
+      });
+    
 
     return updatedSpots;
 
@@ -99,10 +108,6 @@ export default function useApplicationData() {
       });
 
   };
-
-
-  
-
 
 
 

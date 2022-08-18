@@ -40,7 +40,7 @@ export default function Appointment(props) {
     .bookInterview(props.id, interview)
     .then(() => transition(SHOW))
     .catch(() => transition(ERROR_SAVE, true));
-  }
+  };
 
   const destroy = function() {
     transition(DELETING, true);
@@ -50,6 +50,7 @@ export default function Appointment(props) {
     .catch(() => transition(ERROR_DELETE, true));
   };
 
+  console.log("Index just before Show",props);
   return (
     <article className="appointment">
       <Header time={props.time}/>
@@ -59,7 +60,7 @@ export default function Appointment(props) {
       {mode === SHOW && (
         <Show
           student={props.interview.student}
-          interview={props.interview}
+          interviewer={props.interview.interviewer}
           onEdit={() => transition(EDIT)}
           onDelete={() => transition(CONFIRM)}
         />
@@ -68,45 +69,42 @@ export default function Appointment(props) {
         <Form
           
           interviewers={props.interviewers}
-          onCancel={back}
+          onCancel={() => back()}
           onSave={save}
         />
       )}
       {mode === EDIT && (
         <Form
           student={props.interview.student}
-          interview={props.interview}
-          interviewer={props.interview.interviewer}
+          interviewer={props.interview.interviewer.id}
           interviewers={props.interviewers}
-          onCancel={back}
+          onCancel={() => back()}
           onSave={save}
         />
       )}
       {mode === SAVING && (
-        <Status 
-        message='Saving' />
+        <Status message='Saving' />
       )}
       {mode === CONFIRM && (
         <Confirm
          message='Are you sure you would like to delete?' 
-         onCancel={back}
+         onCancel={() => back()}
          onConfirm={destroy}
          />
       )}
       {mode === DELETING && (
-        <Status 
-          message="Deleting" />
+        <Status message="Deleting" />
       )}
       {mode === ERROR_SAVE && (
         <Error 
           message="Could not book appointment." 
-          onClose={back}
+          onClose={() => back()}
         />
       )}
       {mode === ERROR_DELETE && (
         <Error
           message="Could not cancel appointment."
-          onClose={back}
+          onClose={() => back()}
         />
       )}
     </article>
