@@ -16,8 +16,9 @@ export default function useApplicationData() {
       axios.get('http://localhost:8001/api/appointments'),
       axios.get('http://localhost:8001/api/interviewers')
       ]).then((all) => {
-        setState(prev => ({...prev, days: all[0].data, appointments: all[1].data,  interviewes: all[2].data}))
-    });
+        setState(prev => ({...prev, days: all[0].data, appointments: all[1].data,  interviewers: all[2].data}));
+        console.log("useEffect test", all);
+    })
   }, []);
 
 
@@ -29,7 +30,7 @@ export default function useApplicationData() {
     let numSpots = 0;
 
     for (let i of state.appointments) { 
-
+      console.log("for loop", i)
       if(appointments[i].interview === null) {
         numSpots += 1;
       }
@@ -53,23 +54,27 @@ export default function useApplicationData() {
   };
 
   const bookInterview = function(id, interview) {
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment
-    };
 
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
     };
 
-    
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
 
+   
+    console.log("bookInterview values",id,interview)
     return axios.put(`http://localhost:8001/api/appointments/${id}`, {interview})
       .then(() => {
+        console.log("bookInterview log")
         setState({...state, appointments, days: updateSpots(state, appointments)})
+       
       })
       .catch(error => {
+        console.log("bookInterview catch")
         console.log(error)
       });
     
@@ -77,14 +82,16 @@ export default function useApplicationData() {
 
 
   const cancelInterview = function(id) {
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment
-    };
     const appointment = {
       ...state.appointments[id],
       interview: null
     };
+
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+    
 
     return axios.delete(`http://localhost:8001/api/appointments/${id}`)
       .then(() => {
