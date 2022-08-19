@@ -33,7 +33,7 @@ export function getInterview(state, interview) {
 export function getInterviewersForDay(state, day) {
 
   let interviewerList = [];
-  console.log("getInterviewersForDay", state.days);
+  
   for(let appD of state.days) {
 
     if (appD.name === day) {
