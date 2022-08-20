@@ -1,6 +1,7 @@
 import React from "react";
 import Button from "../Button.js";
 
+/*Confirm status component for Appointments */
 export default function Confirm(props) {
 
   return(

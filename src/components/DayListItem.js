@@ -2,6 +2,7 @@ import React from "react";
 import "./DayListItem.scss";
 import classNames from "classnames";
 
+//updates remaining spots for the day
 const formatSpots = function(spots) {
   if (spots === 1) {
     return "1 spot remaining";
@@ -12,6 +13,7 @@ const formatSpots = function(spots) {
   }
 };
 
+/*DayListItem component container  */
 export default function DayListItem(props) {
   const dayName = props.name;
   const spotsRemaining = props.spots;

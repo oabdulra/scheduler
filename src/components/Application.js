@@ -1,6 +1,4 @@
 import React from "react";
-
-
 import "components/Application.scss";
 import DayList from "components/DayList";
 import Appointment from "components/Appointment";
@@ -8,9 +6,10 @@ import useApplicationData from "hooks/useApplicationData";
 import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors";
 
 
-
+/*Application component */
 export default function Application(props) {
   
+  //importing states from hooks
   const {
     state,
     setDay,

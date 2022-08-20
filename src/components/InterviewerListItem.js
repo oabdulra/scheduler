@@ -2,6 +2,7 @@ import React from "react";
 import "components/InterviewerListItem.scss";
 import classNames from "classnames";
 
+/*InterviewerListItem component */
 export default function InterviewerListItem(props) {
   
   

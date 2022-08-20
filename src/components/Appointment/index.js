@@ -1,5 +1,4 @@
 import React from "react";
-
 import Header from "./Header";
 import Show from "./Show";
 import Empty from "./Empty";
@@ -8,9 +7,10 @@ import Status from "./Status";
 import Confirm from "./Confirm";
 import Error from "./Error";
 import useVisualMode from "hooks/useVisualMode";
-
 import "./styles.scss";
 
+
+/*Index component container for appointments, puts the appointment component together */
 export default function Appointment(props) {
 
   const EMPTY = "EMPTY";
@@ -24,10 +24,12 @@ export default function Appointment(props) {
   const ERROR_SAVE = "ERROR_SAVE";
 
 
+  //mode set functions imported in from Hooks
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
 
+  //saves an interview when "save" is clicked and sends a request to update DB
   const save = function(name, interviewer) {
     transition(SAVING);
     
@@ -42,6 +44,7 @@ export default function Appointment(props) {
     .catch(() => transition(ERROR_SAVE, true));
   };
 
+  //deletes an appointment when "delete" is clicked and confirmed, then sends a request to update DB
   const destroy = function() {
     transition(DELETING, true);
     props

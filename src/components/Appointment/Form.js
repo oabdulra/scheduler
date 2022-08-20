@@ -2,23 +2,30 @@ import React, { useState } from 'react';
 import Button from '../Button';
 import InterviewerList from '../InterviewerList';
 
+/*Form component container for appointments */
 export default function Form(props) {
 
+  //state declarations
   const [student, setStudent] = useState(props.student || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
   const [error, setError] = useState("");
 
+
+  //resets states when called
   const reset = function() {
     setStudent("");
     setInterviewer(null);
   };
 
+  //clears states when called
   const cancel = function() {
     reset();
     props.onCancel();
 
   };
 
+  //validates the text box for student and whether or not an interviewer is selected
+  //shoots out an error when these conditions aren't fulfilled
   const validate = function() {
 
     if (student === "") {
