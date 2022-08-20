@@ -27,28 +27,20 @@ export default function useApplicationData() {
 
   const updateSpots = function(state, appointments) {
 
-    let numSpots = 0;
-    const selectedDay = state.days.filter(days => days.name === state.day)[0];
-
-    for (let appt of selectedDay.appointments) {
-      if(!appointments[appt].interview){
-        numSpots++;
-      }
-    }
+    
 
     const updatedSpots = state.days.map(slot => {
 
-        if (slot !== selectedDay) {
-          return slot;
-        }
-
+       if (slot.name === state.day) {
         return {
           ...slot,
-          numSpots
-        };
+          spots: slot.appointments.map(appt => appointments[appt]).filter(({interview}) => !interview).length
+        }
+       }
 
+       return slot;
         
-      });
+    });
     
 
     return updatedSpots;
@@ -75,16 +67,15 @@ export default function useApplicationData() {
     };
 
    
-    console.log("bookInterview values",id,interview)
+    
     return axios.put(`http://localhost:8001/api/appointments/${id}`, {interview})
       .then(() => {
-        console.log("bookInterview log")
+        
         setState({...state, appointments, days: updateSpots(state, appointments)})
-       
+
       })
       .catch(error => {
-        console.log("bookInterview catch")
-        console.log(error)
+        //console.log(error)
       });
     
   };
