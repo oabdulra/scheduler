@@ -2,6 +2,17 @@
 
 Scheduler is a great application that allows students to book interviews with their mentors. These interviews can be modified, deleted and added at will.
 
+## Dependencies 
+
+- react 
+- axios
+- classnames
+- react-dom
+- react-scripts 
+
+
+## Scheduler in action
+
 ![Scrolling through the app](docs/scroll-through.gif)
 
 ![Adding an appointment](docs/add-appointment.gif)
@@ -19,6 +30,7 @@ Install dependencies with `npm install`.
 ```sh
 npm start
 ```
+Be sure to run two terminals, one for the api server and one for the development server
 
 ## Running Jest Test Framework
 
