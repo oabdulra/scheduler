@@ -32,6 +32,8 @@ npm start
 ```
 Be sure to run two terminals, one for the api server and one for the development server
 
+Please click [here](https://github.com/lighthouse-labs/scheduler-api) for an indepth tutorial for setting up the api server. This will include information on setting up the database and seeding it as well.
+
 ## Running Jest Test Framework
 
 ```sh
