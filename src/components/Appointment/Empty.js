@@ -2,7 +2,6 @@ import React from "react";
 
 
 export default function Empty(props) {
-
   /*Empty container component for Appointments*/
   return (
     <main className="appointment__add">

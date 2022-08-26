@@ -9,7 +9,6 @@ import Error from "./Error";
 import useVisualMode from "hooks/useVisualMode";
 import "./styles.scss";
 
-
 /*Index component container for appointments, puts the appointment component together */
 export default function Appointment(props) {
 
@@ -22,7 +21,6 @@ export default function Appointment(props) {
   const DELETING = "DELETING";
   const ERROR_DELETE = "ERROR_DELETE";
   const ERROR_SAVE = "ERROR_SAVE";
-
 
   //mode set functions imported in from Hooks
   const { mode, transition, back } = useVisualMode(
@@ -53,7 +51,6 @@ export default function Appointment(props) {
     .catch(() => transition(ERROR_DELETE, true));
   };
 
-  
   return (
     <article className="appointment" data-testid="appointment">
       <Header time={props.time}/>

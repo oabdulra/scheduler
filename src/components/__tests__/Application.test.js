@@ -1,9 +1,6 @@
 import React from "react";
-
 import { render, cleanup, waitForElement, getByText, fireEvent, getByAltText, getByPlaceholderText, prettyDOM, getAllByTestId, getByTestId, queryByText, queryAllByAltText, queryByAltText} from "@testing-library/react";
-
 import Application from "components/Application";
-
 import axios from "axios";
 
 afterEach(cleanup);
